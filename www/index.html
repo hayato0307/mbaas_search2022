@@ -48,6 +48,15 @@
                     showResults(results);
                 })
         }
+
+        function searchLevel() {
+            let input_level = parseInt($("#level").val());
+            let TestDataClass = ncmb.DataStore(db);
+            TestDataClass.equalTo("level", input_level).fetchAll()
+                .then(function(results) {
+                    showResults(results);
+                })
+        }
     </script>
 </head>
 

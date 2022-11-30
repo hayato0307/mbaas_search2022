@@ -66,7 +66,15 @@
                     showResults(results);
                 })
         }
-
+        
+         function searchLevelGT() {
+            let input_level = parseInt($("#level").val());
+            let TestDataClass = ncmb.DataStore(db);
+            TestDataClass.greaterThan("level", input_level).fetchAll()
+                .then(function(results) {
+                    showResults(results);
+                })
+        }
     </script>
 </head>
 

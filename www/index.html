@@ -46,46 +46,6 @@
             $("#message").html(msg);
         }
 
-        function dataSet(results) {
-            let data = [];
-            let theta = [
-                "HP",
-                "Attack",
-                "Defence",
-                "S_Attack",
-                "S_defence",
-                "Speed"
-            ];
-
-            data = [{
-                type: 'scatterpolar',
-                name: '名前',
-                r: [100, 10, 10, 10, 10, 10],
-                theta: theta,
-                fill: 'toself'
-                    /*
-                    name: results.name,
-                    r: [results[1].HP, resurts[1].Attack, results[1].Defence, results[1].S_Attack, result[1].S_Defence, results[1].Speed],
-                    theta: theta,
-                    fill: 'toself'
-                    */
-            }]
-            layout = {
-                polar: {
-                    radialaxis: {
-                        visibale: true,
-                        range: [0, 150],
-                        angle: 0,
-                    },
-                    angularaxis: {
-                        rotation: 90
-                    }
-                },
-                showlegend: true
-            }
-            Plotly.newPlot(graph, data, layout);
-
-        }
 
         function searchName() {
             let input_name = $("#name").val();
@@ -123,7 +83,16 @@
                 })
         }
 
-        function displayGraph(results) {
+        function displayGraph() {
+            let data = [];
+            let theta = [
+                "HP",
+                "Attack",
+                "Defence",
+                "S_Attack",
+                "S_defence",
+                "Speed"
+            ];
             let layout = {};
             let config = {};
             let input_name = $("#name").val();
@@ -131,7 +100,35 @@
             let graph = document.getElementById('graph');
             TestDataClass.equalTo("name", input_name).fetchAll()
                 .then(function(results) {
-                    dataSet(results);
+                    console.log(results[0].name);
+                    data = [{
+                        type: 'scatterpolar',
+                        name: results[0].name,
+                        r: [results[0].HP, results[0].Attack, results[0].Defence, results[0].S_Attack, results[0].S_Defence, results[0].Speed],
+                        theta: theta,
+                        fill: 'toself'
+                            /*
+                            name: results.name,
+                            r: [results[1].HP, resurts[1].Attack, results[1].Defence, results[1].S_Attack, result[1].S_Defence, results[1].Speed],
+                            theta: theta,
+                            fill: 'toself'
+                            */
+                    }]
+                    layout = {
+                        polar: {
+                            radialaxis: {
+                                visibale: true,
+                                range: [0, 150],
+                                angle: 0,
+                            },
+                            angularaxis: {
+                                rotation: 90
+                            }
+                        },
+                        showlegend: true
+                    }
+                    Plotly.newPlot(graph, data, layout);
+
                 })
         }
     </script>

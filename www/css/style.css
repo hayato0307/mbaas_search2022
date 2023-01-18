@@ -48,3 +48,8 @@ th, td {
 td.num {
   text-align: right;
 }
+
+#graph {
+    width: 100%;
+    height:80em;
+}

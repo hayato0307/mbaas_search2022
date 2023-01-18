@@ -46,6 +46,47 @@
             $("#message").html(msg);
         }
 
+        function dataSet(results) {
+            let data = [];
+            let theta = [
+                "HP",
+                "Attack",
+                "Defence",
+                "S_Attack",
+                "S_defence",
+                "Speed"
+            ];
+
+            data = [{
+                type: 'scatterpolar',
+                name: '名前',
+                r: [100, 10, 10, 10, 10, 10],
+                theta: theta,
+                fill: 'toself'
+                    /*
+                    name: results.name,
+                    r: [results[1].HP, resurts[1].Attack, results[1].Defence, results[1].S_Attack, result[1].S_Defence, results[1].Speed],
+                    theta: theta,
+                    fill: 'toself'
+                    */
+            }]
+            layout = {
+                polar: {
+                    radialaxis: {
+                        visibale: true,
+                        range: [0, 150],
+                        angle: 0,
+                    },
+                    angularaxis: {
+                        rotation: 90
+                    }
+                },
+                showlegend: true
+            }
+            Plotly.newPlot(graph, data, layout);
+
+        }
+
         function searchName() {
             let input_name = $("#name").val();
             let TestDataClass = ncmb.DataStore(db);
@@ -82,17 +123,16 @@
                 })
         }
 
-        function displayGraph() {
+        function displayGraph(results) {
+            let layout = {};
+            let config = {};
+            let input_name = $("#name").val();
             let TestDataClass = ncmb.DataStore(db);
             let graph = document.getElementById('graph');
-            Plotly.plot(graph, [{
-                x: [1, 2, 3, 4, 5],
-                y: [1, 2, 4, 8, 16]
-            }], {
-                margin: {
-                    t: 0
-                }
-            });
+            TestDataClass.equalTo("name", input_name).fetchAll()
+                .then(function(results) {
+                    dataSet(results);
+                })
         }
     </script>
 </head>

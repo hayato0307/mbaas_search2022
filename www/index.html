@@ -56,19 +56,19 @@
                 })
         }
 
-        function searchLevel() {
-            let input_level = parseInt($("#level").val());
+        function searchStatus() {
+            let input_status = parseInt($("#status").val());
             let TestDataClass = ncmb.DataStore(db);
-            TestDataClass.equalTo("level", input_level).fetchAll()
+            TestDataClass.equalTo("status", input_status).fetchAll()
                 .then(function(results) {
                     showResults(results);
                 })
         }
 
         function searchLevelLT() {
-            let input_level = parseInt($("#level").val());
+            let input_status = parseInt($("#status").val());
             let TestDataClass = ncmb.DataStore(db);
-            TestDataClass.lessThan("level", input_level).fetchAll()
+            TestDataClass.equalTo("status", input_status).order("status", false).fetchAll()
                 .then(function(results) {
                     showResults(results);
                 })
@@ -141,16 +141,20 @@
         <input id="name" type="text" placeholder="monster name">
     </div>
     <div>
-        <label for="level">level:</label>
-        <input id="level" type="number" placeholder="monster level">
+        <label for="status">status:</label>
+        <input id="status" type="text" placeholder="monster status">
     </div>
     <div id="button">
         <button class="btn" onclick="fetchAll()">Fetch All</button>
         <button class="btn" onclick="searchName()">Name</button>
         <br>
-        <button class="btn" onclick="searchLevelLT()">status &lt;</button>
-        <button class="btn" onclick="searchLevel()">status</button>
-        <button class="btn" onclick="searchLevelGT()"> status &gt;</button>
+        <button class="btn" onclick="sortHP()">HP</button>
+        <button class="btn" onclick="sortAttack()">Attack</button>
+        <button class="btn" onclick="sortDefence()">Defence</button>
+        <button class="btn" onclick="sortS_Attack()">S_Attack</button>
+        <button class="btn" onclick="sortS_Defence()">S_Defence</button>
+        <button class="btn" onclick="sortSpeed()">Speed</button>
+
         <br>
         <button class="btn" onclick="displayGraph()">Graph</button>
     </div>

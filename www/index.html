@@ -56,10 +56,10 @@
                 })
         }
 
-        function searchStatus() {
-            let input_status = parseInt($("#status").val());
+        function sortHP() {
+            //let input_status = parseInt($("#status").val());
             let TestDataClass = ncmb.DataStore(db);
-            TestDataClass.equalTo("status", input_status).fetchAll()
+            TestDataClass.order("HP", true).fetchAll()
                 .then(function(results) {
                     showResults(results);
                 })
